@@ -1,0 +1,31 @@
+#################################################################
+# KEYBOARD BINDINGS FOR ANY TWM
+#################################################################
+
+#################################################################
+# SUPER + FUNCTION KEYS
+#################################################################
+
+
+#Pavucontrol
+super + v
+    pavucontrol
+
+#alacritty
+super + Return
+    alacritty
+
+#Xkill
+super + Escape
+    xkill
+
+#################################################################
+# SUPER + SHIFT KEYS
+#################################################################
+
+#reload sxhkd:
+super + shift + s
+	pkill -USR1 -x sxhkd
+
+super + shift + l
+	archlinux-logout
