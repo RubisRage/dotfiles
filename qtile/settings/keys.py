@@ -48,6 +48,9 @@ keys = [Key(key[0], key[1], *key[2:]) for key in [
 
     # ------------ App Configs ------------
 
+    # Logout
+    ([], "Home", lazy.spawn("archlinux-logout")),
+
     # Menu
     ([mod], "m", lazy.spawn("rofi -show drun")),
 
@@ -72,6 +75,17 @@ keys = [Key(key[0], key[1], *key[2:]) for key in [
     ([mod, "shift"], "s", lazy.spawn("scrot -s")),
 
     # ------------ Hardware Configs ------------
+
+    # Media control
+    ([], "XF86AudioPlay", lazy.spawn(
+        "playerctl play-pause"
+    )),
+    ([], "XF86AudioPrev", lazy.spawn(
+        "playerctl previous"
+    )),
+    ([], "XF86AudioNext", lazy.spawn(
+        "playerctl next"
+    )),
 
     # Volume
     ([], "XF86AudioLowerVolume", lazy.spawn(

@@ -2,7 +2,6 @@
 set fish_greeting
 set VIRTUAL_ENV_DISABLE_PROMPT "1"
 set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
-## Source .profile to apply its values
 
 ## Add ~/.local/bin to PATH
 if test -d ~/.local/bin
@@ -76,7 +75,7 @@ alias ls='exa -al --color=always --group-directories-first' # preferred listing
 alias la='exa -a --color=always --group-directories-first'  # all files and dirs
 alias ll='exa -l --color=always --group-directories-first'  # long format
 alias lt='exa -aT --color=always --group-directories-first' # tree listing
-alias l.="exa -a | egrep '^\.'"
+alias l.="exa -a | grep -E '^\.'"
 
 # Replace some more things with better alternatives
 [ ! -x /usr/bin/bat ] && [ -x /usr/bin/cat ] && alias cat='bat'
@@ -99,8 +98,6 @@ alias ......='cd ../../../../..'
 alias dir='dir --color=auto'
 alias vdir='vdir --color=auto'
 alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
 alias hw='hwinfo --short'                                   # Hardware Info
 alias big="expac -H M '%m\t%n' | sort -h | nl"              # Sort installed packages according to size in MB (expac must be installed)
 alias gitpkg='pacman -Q | grep -i "\-git" | wc -l'			# List amount of -git packages
@@ -142,8 +139,6 @@ set --universal nvm_default_version lts
 function fish_mode_prompt
   echo
   echo " [ "
-
-  # { left = '', right = ''}
 
   switch $fish_bind_mode
     case default

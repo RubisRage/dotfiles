@@ -1,31 +1,56 @@
-# Antonio Sarosi
-# https://youtube.com/c/antoniosarosi
-# https://github.com/antoniosarosi/dotfiles
-
-# Qtile workspaces
-
-from libqtile.config import Key, Group
+from libqtile.config import Key, Group, Match
 from libqtile.command import lazy
 from .keys import mod, keys
 
+# " ", " ", " ", " ", " ", " ", " ", " ", " ", , 
+# [" ", None, "thunar"],
 
-# Get the icons at https://www.nerdfonts.com/cheat-sheet (you need a Nerd Font)
-# Icons: 
-# nf-fa-firefox, 
-# nf-fae-python, 
-# nf-dev-terminal, 
-# nf-fa-code, 
-# nf-oct-git_merge, 
-# nf-linux-docker,
-# nf-mdi-image, 
-# nf-mdi-layers
 
-groups = [Group(i) for i in [
-    " ", " ", " ", " ", " ", " ", " ", " ", " ",
-]]
+def create_groups():
+    #   Icon | Match | Application | Layout
+    workspace_config = [
+            ["󰋜 ", [], None, 'max'],
+            [" ", ['firefox'], None, 'max'],
+            [" ", [], "alacritty", 'max'],
+            [" ", ['Mail'], None, 'max'],
+            [" ", ['kuro'], "/opt/kuro/Kuro.AppImage", 'max'],
+            [
+                " ",
+                ['whatsapp-nativefier-d40211', 'telegram-desktop'],
+                ["whatsapp-nativefier", 'telegram-desktop'],
+                'monadtall'
+            ],
+            ["󰙯 ", [], "discord", 'max'],
+            [" ", ['qtws'], "gtk-launch youtube-music-desktop", 'max'],
+            [" ", [], "virtualbox", 'max'],
+    ]
+
+    groups = []
+
+    for icon, matches, app, layout in workspace_config:
+
+        group_matches = []
+
+        for match in matches:
+            group_matches.append(Match(wm_class=match))
+
+        if len(group_matches) == 0:
+            group_matches = None
+
+        groups.append(Group(
+            icon,
+            matches=group_matches,
+            spawn=app,
+            layout=layout
+        ))
+
+    return groups
+
+
+groups = create_groups()
 
 for i, group in enumerate(groups):
-    actual_key = str(i + 1)
+    actual_key = str(i)
     keys.extend([
         # Switch to workspace N
         Key([mod], actual_key, lazy.group[group.name].toscreen()),
