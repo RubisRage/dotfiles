@@ -49,7 +49,7 @@ keys = [Key(key[0], key[1], *key[2:]) for key in [
     # ------------ App Configs ------------
 
     # Logout
-    ([], "Home", lazy.spawn("archlinux-logout")),
+    ([], "Prior", lazy.spawn("archlinux-logout")),
 
     # Menu
     ([mod], "m", lazy.spawn("rofi -show drun")),
