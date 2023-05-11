@@ -1,0 +1,30 @@
+               packer.nvim - 3 / 30 sync tasks
+ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ ✓ williamboman/mason-lspconfig.nvim: updated: cec0e6d...90a8bbf
+ ⟳ nvim-telescope/telescope.nvim: pulling updates...
+ ✓ hrsh7th/cmp-nvim-lsp: already up to date
+ ✓ hrsh7th/cmp-buffer: already up to date
+ ✓ nvim-lua/plenary.nvim: already up to date
+ ✓ iamcco/markdown-preview.nvim: already up to date
+ ✓ L3MON4D3/LuaSnip: updated: a46ab6f...b4bc24c
+ ✓ saadparwaiz1/cmp_luasnip: already up to date
+ ✓ nvim-lualine/lualine.nvim: updated: 84ffb80...05d78e9
+ ✓ kyazdani42/nvim-web-devicons: updated: b34362b...986875b
+ ✓ lervag/vimtex: updated: 871ac46...18255a2
+ ✓ VonHeikemen/lsp-zero.nvim/v1.x: updated: 8f7436b...6a6be78
+ ✓ windwp/nvim-ts-autotag: already up to date
+ ✓ hrsh7th/cmp-nvim-lua: already up to date
+ ✓ lunarvim/horizon.nvim: already up to date
+ ✓ nvim-treesitter/nvim-treesitter: updated: bff7115...957aefe
+ ✓ bluz71/vim-nightfly-colors: already up to date
+ ✓ theprimeagen/harpoon: updated: f7040fd...3476228
+ ✓ xiyaowong/nvim-transparent: already up to date
+ ✓ wbthomason/packer.nvim: already up to date
+ ✓ rafamadriz/friendly-snippets: updated: 2308366...10f7419
+ ✓ neovim/nvim-lspconfig: updated: 3bd4ca4...1c0e6d3
+ ✓ mbbill/undotree: already up to date
+ ✓ tpope/vim-fugitive: already up to date
+ ✓ hrsh7th/nvim-cmp: updated: 9b0bc5f...935b406
+ ✓ hrsh7th/cmp-path: already up to date
+ ✓ williamboman/mason.nvim: updated: 057ac5c...a513913
+ ✓ folke/tokyonight.nvim: updated: f2ed287...df13e32

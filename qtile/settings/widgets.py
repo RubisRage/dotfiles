@@ -1,5 +1,4 @@
 from libqtile import widget
-from libqtile.command import lazy
 from .theme import colors
 
 # MOUSE CALLBACK FUNCTIONS
@@ -9,7 +8,6 @@ def calendar(qtile):
     qtile.spawn_cmd("galendae")
 
 # Get the icons at https://www.nerdfonts.com/cheat-sheet (you need a Nerd Font)
-
 
 def base(fg='text', bg='dark'):
     return {

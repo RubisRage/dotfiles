@@ -57,8 +57,6 @@ return require('packer').startup(function(use)
         ft = { "markdown" },
     })
 
-    use {"akinsho/toggleterm.nvim", tag = '*'}
-
     use( 'xiyaowong/nvim-transparent' )
 
     use {

@@ -80,6 +80,9 @@ alias l.="exa -a | grep -E '^\.'"
 # Replace some more things with better alternatives
 [ ! -x /usr/bin/bat ] && [ -x /usr/bin/cat ] && alias cat='bat'
 
+# Latex 
+alias latexclean='find . -maxdepth 1 -type f ! -name "*.tex" ! -name "*.bib" -exec rm {} \;'
+
 # Common use
 alias aup="pamac upgrade --aur"
 alias grubup="sudo update-grub"
@@ -101,6 +104,7 @@ alias grep='grep --color=auto'
 alias hw='hwinfo --short'                                   # Hardware Info
 alias big="expac -H M '%m\t%n' | sort -h | nl"              # Sort installed packages according to size in MB (expac must be installed)
 alias gitpkg='pacman -Q | grep -i "\-git" | wc -l'			# List amount of -git packages
+alias cat="bat"
 
 # Get fastest mirrors 
 alias mirror="sudo reflector -f 30 -l 30 --number 10 --verbose --save /etc/pacman.d/mirrorlist" 
@@ -126,8 +130,6 @@ alias rip="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -200 | nl"
 
 # Replace yay with paru
 [ ! -x /usr/bin/yay ] && [ -x /usr/bin/paru ] && alias yay='paru'
-
-alias cat="bat"
 
 ## Run neofetch if session is interactive
 if status --is-interactive
