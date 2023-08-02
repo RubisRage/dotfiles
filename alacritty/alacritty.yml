@@ -14,7 +14,7 @@ env:
 
 window:
   decorations_theme_variant: Dark
-  opacity: 0.90
+  opacity: 0.85
   # Window dimensions (changes require restart)
   #
   # Specified in number of columns/lines, not pixels.
