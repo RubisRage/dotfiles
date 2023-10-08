@@ -23,3 +23,6 @@ vim.opt.isfname:append("@-@")
 vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "80"
+
+vim.api.nvim_create_autocmd("TextYankPost",
+    { callback = function() vim.highlight.on_yank { higroup = 'IncSearch', timeout = 50 } end })

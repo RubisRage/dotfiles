@@ -2,15 +2,20 @@
 set fish_greeting
 set VIRTUAL_ENV_DISABLE_PROMPT "1"
 set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
+set -x MANROFFOPT "-c"
 
-## Add ~/.local/bin to PATH
-if test -d ~/.local/bin
-    if not contains -- ~/.local/bin $PATH
-        set -p PATH ~/.local/bin
+function add_to_path
+    if test -d $argv[1]
+        if not contains -- $argv[1] $PATH
+            set -p PATH $argv[1]
+        end
     end
 end
 
-set -p PATH /usr/local/texlive/2022/bin/x86_64-linux
+add_to_path ~/.local/bin
+add_to_path ~/.cargo/bin
+add_to_path /usr/local/texlive/2022/bin/x86_64-linux
+add_to_path ~/.platformio/penv/bin/
 
 
 ## Starship prompt
@@ -55,6 +60,13 @@ function backup --argument filename
     cp $filename $filename.bak
 end
 
+# Developing
+function lspskel --argument lsp
+    if test -f ~/.config/lsp_skel/$lsp
+        command cp ~/.config/lsp_skel/$lsp ./.$lsp
+    end
+end
+
 
 ## Copy DIR1 DIR2
 function copy
@@ -79,6 +91,7 @@ alias l.="exa -a | grep -E '^\.'"
 
 # Replace some more things with better alternatives
 [ ! -x /usr/bin/bat ] && [ -x /usr/bin/cat ] && alias cat='bat'
+
 
 # Latex 
 alias latexclean='find . -maxdepth 1 -type f ! -name "*.tex" ! -name "*.bib" -exec rm {} \;'

@@ -14,7 +14,7 @@ env:
 
 window:
   decorations_theme_variant: Dark
-  opacity: 0.90 
+  opacity: 0.85
   # Window dimensions (changes require restart)
   #
   # Specified in number of columns/lines, not pixels.
@@ -90,7 +90,7 @@ scrolling:
 # Font configuration
 font:
   # Normal (roman) font face
-  size: 12
+  size: 13 
   normal:
     # Font family
     #
@@ -98,8 +98,8 @@ font:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    # family: FantasqueSansM Nerd Font
-    family: JetBrainsMono Nerd Font Mono
+    family: FantasqueSansM Nerd Font
+    # family: UbuntuMono Nerd Font Mono 
 
     # The `style` can be specified to pick a specific face.
     #style: Regular
@@ -110,8 +110,7 @@ font:
     #
     # If the bold family is not specified, it will fall back to the
     # value specified for the normal font.
-    # family: FantasqueSansM Nerd Font
-    family: JetBrainsMono Nerd Font Mono
+    family: FantasqueSansM Nerd Font
     # family: UbuntuMono Nerd Font Mono 
 
     # The `style` can be specified to pick a specific face.
@@ -123,8 +122,7 @@ font:
     #
     # If the italic family is not specified, it will fall back to the
     # value specified for the normal font.
-    # family: FantasqueSansM Nerd Font
-    family: JetBrainsMono Nerd Font Mono
+    family: FantasqueSansM Nerd Font
     # family: UbuntuMono Nerd Font Mono 
 
     # The `style` can be specified to pick a specific face.
@@ -136,8 +134,7 @@ font:
     #
     # If the bold italic family is not specified, it will fall back to the
     # value specified for the normal font.
-    # family: FantasqueSansM Nerd Font
-    family: JetBrainsMono Nerd Font Mono
+    family: FantasqueSansM Nerd Font
     # family: UbuntuMono Nerd Font Mono 
 
     # The `style` can be specified to pick a specific face.
@@ -686,11 +683,4 @@ scheme:
       cyan:    '0x0db9d7'
       white:   '0xacb0d0'
 
-# colors: *nightfly
-import:
-  # uncomment the flavour you want below:
-  - ~/.config/alacritty/catppuccin/catppuccin-mocha.yml
-#  - ~/.config/alacritty/catppuccin/catppuccin-macchiato.yml
-#  - ~/.config/alacritty/catppuccin/catppuccin-frappe.yml
-#  - ~/.config/alacritty/catppuccin/catppuccin-latte.yml
-
+colors: *nightfly

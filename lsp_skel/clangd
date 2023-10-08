@@ -1,0 +1,8 @@
+CompileFlags:
+  Compiler: '' # Specify toolchain, or remove to use native
+  Add: [] # Specify comma separated list of compiler options to be added
+
+  Remove: # Specify comma separated list of compiler options to be removed
+
+Diagnostics:
+  Suppress: # Specify comma separated list of warnings to be suppressed.
