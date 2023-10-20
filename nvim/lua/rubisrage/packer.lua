@@ -61,6 +61,17 @@ return require('packer').startup(function(use)
         config = require('rubisrage.dap').setup_python_dap
     }
 
+    use {
+        'jay-babu/mason-nvim-dap.nvim',
+        requires = {
+            'mfussenegger/nvim-dap',
+            'mfussenegger/nvim-dap-ui',
+        },
+        config = function()
+            require('mason-nvim-dap').setup()
+        end
+    }
+
     use 'WhoIsSethDaniel/mason-tool-installer'
 
     use { 'tpope/vim-dispatch',
@@ -72,7 +83,7 @@ return require('packer').startup(function(use)
 
     -- File Navigation
     use {
-        'nvim-telescope/telescope.nvim', tag = '0.1.1',
+        'nvim-telescope/telescope.nvim', tag = '0.1.3',
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
     use { 'theprimeagen/harpoon' }

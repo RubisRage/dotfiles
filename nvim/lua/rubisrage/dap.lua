@@ -24,4 +24,7 @@ function M.setup_python_dap()
     require('dap-python').setup(path)
 end
 
+function M.setup_cpp_dap()
+end
+
 return M
