@@ -10,6 +10,9 @@ require('mason-tool-installer').setup {
         'clangd',
         'codelldb',
 
+        -- Go
+        'gopls',
+
         -- Python
         'pylsp',
         'debugpy',

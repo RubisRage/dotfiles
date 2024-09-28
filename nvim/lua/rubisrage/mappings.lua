@@ -11,8 +11,8 @@ if not WhichKeySetup then
         f = {
             name = 'Files',
             -- e = { vim.cmd.CHADopen, 'Toggle file explorer' },
-            e = { vim.cmd.Ranger, 'Toggle file explorer' },
-            f = { builtin.find_files, 'Find files' },
+            e = { vim.cmd.Explore, 'Toggle file explorer' },
+            h = { builtin.find_files, 'Find files' },
             g = { builtin.git_files, 'Find git files' },
             s = { builtin.live_grep, 'Find greped files' },
         },
@@ -37,11 +37,6 @@ if not WhichKeySetup then
         p = {
             name = 'Preview',
             m = { vim.cmd.MarkdownPreviewToggle, 'Open Markdown preview' }
-        },
-
-        l = {
-            name = "Code (No LSP attached)",
-            l = "You are not in a buffer with an attached LSP server"
         },
 
         d = {

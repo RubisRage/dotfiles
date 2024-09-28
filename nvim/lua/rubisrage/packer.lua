@@ -87,12 +87,12 @@ return require('packer').startup(function(use)
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
     use { 'theprimeagen/harpoon' }
-    use {
-        "ms-jpq/chadtree",
-        run = ':CHADdeps'
-    }
-    use 'francoiscabrol/ranger.vim'
-    use 'rbgrouleff/bclose.vim'
+    -- use {
+    --     "ms-jpq/chadtree",
+    --     run = ':CHADdeps'
+    -- }
+    -- use 'francoiscabrol/ranger.vim'
+    -- use 'rbgrouleff/bclose.vim'
 
     -- Markdown and Latex
     use { 'lervag/vimtex' }

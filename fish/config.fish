@@ -14,7 +14,7 @@ end
 
 add_to_path ~/.local/bin
 add_to_path ~/.cargo/bin
-add_to_path /usr/local/texlive/2022/bin/x86_64-linux
+add_to_path /usr/local/texlive/2023/bin/x86_64-linux
 add_to_path ~/.platformio/penv/bin/
 
 
