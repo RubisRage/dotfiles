@@ -20,7 +20,7 @@ lsp.skip_server_setup({ 'clangd' })
 -- Global config
 lsp.setup_servers({
     -- Web
-    'tsserver',
+    'ts_ls',
     'eslint',
     'html',
     'cssls',
@@ -37,14 +37,19 @@ lsp.setup_servers({
 
 
 lsp.on_attach(function(client, bufnr)
+    if client.name == 'Github Copilot' then
+        return
+    end
+
     lsp.default_keymaps({ buffer = bufnr })
 
-    local wk = require('which-key')
-    local m = require('rubisrage.mappings')
+    local lsp_mappings = require('rubisrage.mappings').lsp
 
-    m.opts['buffer'] = bufnr
+    for _, mapping in ipairs(lsp_mappings) do
+        mapping.buffer = bufnr
+    end
 
-    wk.register(m.mappings, m.opts)
+    require('which-key').add(lsp_mappings)
 end)
 
 -- Snippets
@@ -61,7 +66,7 @@ lsp.format_on_save({
         ['pylsp'] = { 'python' },
         ['clangd'] = { 'c', 'cpp' },
         ['rust_analyzer'] = { 'rust' },
-        ['tsserver'] = {
+        ['ts_ls'] = {
             'javascript',
             'javascript.jsx',
             'typescript',

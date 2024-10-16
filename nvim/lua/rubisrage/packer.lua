@@ -11,9 +11,9 @@ return require('packer').startup(function(use)
     }
 
     use { 'folke/tokyonight.nvim' }
-    use { "bluz71/vim-nightfly-colors", as = "nightfly" }
-    use { "lunarvim/horizon.nvim" }
-    use { "catppuccin/nvim", as = "catppuccin" }
+    use { 'bluz71/vim-nightfly-colors', as = 'nightfly' }
+    use { 'lunarvim/horizon.nvim' }
+    use { 'catppuccin/nvim', as = 'catppuccin' }
 
     -- LSP, DAP and highlighting
     use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
@@ -48,7 +48,7 @@ return require('packer').startup(function(use)
     use 'mfussenegger/nvim-dap'
     use {
         'rcarriga/nvim-dap-ui',
-        requires = { 'mfussenegger/nvim-dap' },
+        requires = { 'mfussenegger/nvim-dap', 'nvim-neotest/nvim-nio' },
         config = require('rubisrage.dap').setup_dap_ui
     }
     use {
@@ -79,7 +79,7 @@ return require('packer').startup(function(use)
         cmd = { 'Dispatch', 'Make', 'Focus', 'Start' }
     }
 
-    use 'github/copilot.vim'
+    -- use 'github/copilot.vim'
 
     -- File Navigation
     use {
@@ -87,20 +87,14 @@ return require('packer').startup(function(use)
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
     use { 'theprimeagen/harpoon' }
-    -- use {
-    --     "ms-jpq/chadtree",
-    --     run = ':CHADdeps'
-    -- }
-    -- use 'francoiscabrol/ranger.vim'
-    -- use 'rbgrouleff/bclose.vim'
 
     -- Markdown and Latex
     use { 'lervag/vimtex' }
     use {
-        "iamcco/markdown-preview.nvim",
-        run = "cd app && npm install",
-        setup = function() vim.g.mkdp_filetypes = { "markdown" } end,
-        ft = { "markdown" },
+        'iamcco/markdown-preview.nvim',
+        run = 'cd app && npm install',
+        setup = function() vim.g.mkdp_filetypes = { 'markdown' } end,
+        ft = { 'markdown' },
     }
 
     -- Git
@@ -108,11 +102,11 @@ return require('packer').startup(function(use)
 
     -- Which key
     use {
-        "folke/which-key.nvim",
+        'folke/which-key.nvim',
         config = function()
             vim.o.timeout = true
             vim.o.timeoutlen = 500
-            require("which-key").setup {}
+            require('which-key').setup {}
         end
     }
 
@@ -120,6 +114,6 @@ return require('packer').startup(function(use)
 
     -- Utils
     use { 'christoomey/vim-tmux-navigator' }
-    use { "windwp/nvim-ts-autotag" }
+    use { 'windwp/nvim-ts-autotag' }
     use { 'mbbill/undotree' }
 end)

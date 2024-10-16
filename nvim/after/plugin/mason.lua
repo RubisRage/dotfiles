@@ -1,7 +1,7 @@
 require('mason-tool-installer').setup {
     ensure_installed = {
         -- Web
-        'tsserver',
+        'ts_ls',
         'eslint',
         'html',
         'cssls',

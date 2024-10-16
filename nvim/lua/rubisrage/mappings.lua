@@ -1,78 +1,64 @@
-local wk = require('which-key')
-
 local builtin = require('telescope.builtin')
 local mark = require("harpoon.mark")
 local ui = require("harpoon.ui")
 
 WhichKeySetup = false
 
-if not WhichKeySetup then
-    wk.register({
-        f = {
-            name = 'Files',
-            -- e = { vim.cmd.CHADopen, 'Toggle file explorer' },
-            e = { vim.cmd.Explore, 'Toggle file explorer' },
-            h = { builtin.find_files, 'Find files' },
-            g = { builtin.git_files, 'Find git files' },
-            s = { builtin.live_grep, 'Find greped files' },
-        },
+local general_mappings = {
+    -- Files
+    { "<leader>f",  group = "Files" },
+    { "<leader>fe", vim.cmd.Explore,                        desc = 'Toggle file explorer' },
+    { "<leader>fh", builtin.find_files,                     desc = 'Find files' },
+    { "<leader>fg", builtin.git_files,                      desc = 'Find git files' },
+    { "<leader>fs", builtin.live_grep,                      desc = 'Find greped files' },
+    { "<leader>u",  vim.cmd.UndotreeToggle,                 desc = 'Toggle undo tree' },
 
-        u = { vim.cmd.UndotreeToggle, 'Toggle undo tree' },
+    -- Navigation
+    { "<leader>n",  group = "Navigation" },
+    { "<leader>nm", mark.add_file,                          desc = 'Mark file with Harpoon' },
+    { "<leader>ne", ui.toggle_quick_menu,                   desc = 'Show marked files' },
+    { "<leader>nf", function() ui.nav_file(1) end,          desc = 'Navigate to first marked file' },
+    { "<leader>nd", function() ui.nav_file(2) end,          desc = 'Navigate to second marked file' },
+    { "<leader>ns", function() ui.nav_file(3) end,          desc = 'Navigate to third marked file' },
+    { "<leader>na", function() ui.nav_file(4) end,          desc = 'Navigate to fourth marked file' },
 
-        n = {
-            name = 'Navigation',
-            m = { mark.add_file, 'Mark file with Harpoon' },
-            e = { ui.toggle_quick_menu, 'Show marked files' },
-            ['f'] = { function() ui.nav_file(1) end, 'Navigate to first marked file' },
-            ['d'] = { function() ui.nav_file(2) end, 'Navigate to second marked file' },
-            ['s'] = { function() ui.nav_file(3) end, 'Navigate to third marked file' },
-            ['a'] = { function() ui.nav_file(4) end, 'Navigate to fourth marked file' },
-        },
+    -- Git
+    { "<leader>g",  group = "Git" },
+    { "<leader>gs", function() vim.cmd('vertical Git') end, desc = 'Git status' },
 
-        g = {
-            name = 'Git',
-            s = { function() vim.cmd('vertical Git') end, 'Git status' }
-        },
+    -- Preview
+    { "<leader>p",  group = "Preview" },
+    { "<leader>pm", vim.cmd.MarkdownPreviewToggle,          desc = 'Open Markdown preview' },
 
-        p = {
-            name = 'Preview',
-            m = { vim.cmd.MarkdownPreviewToggle, 'Open Markdown preview' }
-        },
-
-        d = {
-            name = "Debugging and running",
-            b = { vim.cmd.DapToggleBreakpoint, 'Toggle breakpoint' },
-            c = { vim.cmd.DapContinue, 'Start/Continue execution' },
-            n = { vim.cmd.DapStepOver, 'Next: Step over function' },
-            i = { vim.cmd.DapStepInto, 'Next: Step into function' },
-            f = { vim.cmd.DapStepOut, 'Next: Step out of function' },
-            t = { vim.cmd.DapTerminate, 'Kill: Terminate running session' },
-        }
-
-    }, { prefix = '<leader>' })
-
-    WhichKeySetup = true
-end
+    -- Debugging and running
+    { "<leader>d",  group = "Debugging and running" },
+    { "<leader>db", vim.cmd.DapToggleBreakpoint,            desc = 'Toggle breakpoint' },
+    { "<leader>dc", vim.cmd.DapContinue,                    desc = 'Start/Continue execution' },
+    { "<leader>dn", vim.cmd.DapStepOver,                    desc = 'Next: Step over function' },
+    { "<leader>di", vim.cmd.DapStepInto,                    desc = 'Next: Step into function' },
+    { "<leader>df", vim.cmd.DapStepOut,                     desc = 'Next: Step out of function' },
+    { "<leader>dt", vim.cmd.DapTerminate,                   desc = 'Kill: Terminate running session' },
+}
 
 -- LSP mappings, only loaded on LSP attach (after/plugin/lsp.lua)
 local lsp_mappings = {
-    mappings = {
-        name = "Code (LSP)",
-        I = { vim.lsp.buf.hover, "Show symbol's information" },
-        d = { vim.lsp.buf.definition, "Show symbol's definition" },
-        D = { vim.lsp.buf.declaration, "Show symbol's declaration" },
-        i = { vim.lsp.buf.implementation, "Show symbol's implementations" },
-        o = { vim.lsp.buf.type_definition, "Jump to symbol's type definition" },
-        r = { vim.lsp.buf.references, "List symbol's references" },
-        s = { vim.lsp.buf.references, "Show symbol's signature information" },
-        R = { vim.lsp.buf.rename, "Rename all references to symbol" },
-        a = { vim.lsp.buf.code_action, "Code action" },
-        h = { vim.cmd.ClangdSwitchSourceHeader, "Switch between Header and Source file (C/C++)" },
-        l = { vim.diagnostic.open_float, "Show diagnostics" },
-        ['>'] = { vim.diagnostic.goto_next, "Jump to next diagnostic" },
-        ['<'] = { vim.diagnostic.goto_prev, "Jump to previous diagnostic" },
-    },
-    opts = { prefix = '<leader>l', noremap = true }
+    { "<leader>l",  group = "Language server" },
+    { "<leader>lI", vim.lsp.buf.hover,                desc = "Show symbol's information" },
+    { "<leader>ld", vim.lsp.buf.definition,           desc = "Show symbol's definition" },
+    { "<leader>lD", vim.lsp.buf.declaration,          desc = "Show symbol's declaration" },
+    { "<leader>li", vim.lsp.buf.implementation,       desc = "Show symbol's implementations" },
+    { "<leader>lo", vim.lsp.buf.type_definition,      desc = "Jump to symbol's type definition" },
+    { "<leader>lr", vim.lsp.buf.references,           desc = "List symbol's references" },
+    { "<leader>ls", vim.lsp.buf.references,           desc = "Show symbol's signature information" },
+    { "<leader>lR", vim.lsp.buf.rename,               desc = "Rename all references to symbol" },
+    { "<leader>la", vim.lsp.buf.code_action,          desc = "Code action" },
+    { "<leader>lh", vim.cmd.ClangdSwitchSourceHeader, desc = "Switch between Header and Source file (C/C++)" },
+    { "<leader>ll", vim.diagnostic.open_float,        desc = "Show diagnostics" },
+    { "<leader>l>", vim.diagnostic.goto_next,         desc = "Jump to next diagnostic" },
+    { "<leader>l<", vim.diagnostic.goto_prev,         desc = "Jump to previous diagnostic" },
 }
 
-return lsp_mappings
+return {
+    general = general_mappings,
+    lsp = lsp_mappings
+}
