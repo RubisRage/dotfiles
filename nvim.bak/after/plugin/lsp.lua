@@ -35,8 +35,7 @@ lsp.setup_servers({
     'rust_analyzer'
 })
 
-
-lsp.on_attach(function(client, bufnr)
+local function bind_lsp_mappings(client, bufnr)
     if client.name == 'Github Copilot' then
         return
     end
@@ -50,7 +49,9 @@ lsp.on_attach(function(client, bufnr)
     end
 
     require('which-key').add(lsp_mappings)
-end)
+end
+
+lsp.on_attach(bind_lsp_mappings)
 
 -- Snippets
 require("luasnip.loaders.from_vscode").lazy_load()
