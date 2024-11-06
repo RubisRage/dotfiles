@@ -16,7 +16,8 @@ return {
   { "theprimeagen/harpoon" },
 
   {
-    "christoomey/vim-tmux-navigator",
+    "christmey/vim-tmux-navigator",
+    lazy = false,
     cmd = {
       "TmuxNavigateLeft",
       "TmuxNavigateDown",
@@ -24,9 +25,15 @@ return {
       "TmuxNavigateRight",
       "TmuxNavigatePrevious",
     },
+    keys = {
+      { "<a-h>", "<cmd><C-U>TmuxNavigateLeft<cr>" },
+      { "<a-j>", "<cmd><C-U>TmuxNavigateDown<cr>" },
+      { "<a-k>", "<cmd><C-U>TmuxNavigateUp<cr>" },
+      { "<a-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
+    },
   },
 
-  { "mbbill/undotree", cmd = { "UndotreeToggle" }},
+  { "mbbill/undotree", cmd = { "UndotreeToggle" } },
 
   { "tpope/vim-fugitive" },
 
