@@ -1,0 +1,10 @@
+Keep doing theese {
+
+  LSP mappings https://neovim.io/doc/user/lsp.html#lsp-buf 
+    - Search for a nice map for type information and type hierarchy [x]
+
+  rustaceanvim config https://github.com/mrcjkb/rustaceanvim#gear-advanced-configuration
+    - Mappings [x]
+    - DAP
+
+}

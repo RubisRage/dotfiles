@@ -5,14 +5,6 @@
 ---@type ChadrcConfig
 local M = {}
 
-M.base46 = {
-	theme = "melange",
-}
-
-M.cheatsheet = {
-  theme = "simple"
-}
-
 local formatters = {
   "prettier",
   "clang-format",
@@ -29,6 +21,14 @@ vim.list_extend(pkgs, servers)
 
 M.mason = {
   pkgs = pkgs
+}
+
+M.base46 = {
+	theme = "melange",
+}
+
+M.cheatsheet = {
+  theme = "simple"
 }
 
 return M

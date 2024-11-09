@@ -1,47 +1,39 @@
 local lspconfig = require "lspconfig"
 local nvlsp = require "nvchad.configs.lspconfig"
 
-local M = {}
-
-M.build_mapping = function(modes, lhs, rhs, desc)
-  return {
-    modes = modes,
-    lhs = lhs,
-    rhs = rhs,
-    desc = desc,
-  }
-end
-
-M.mappings = {
-  M.build_mapping("n", "gd", vim.lsp.buf.definition, "Go to definition"),
-  M.build_mapping("n", "gD", vim.lsp.buf.declaration, "Go to declaration"),
-  M.build_mapping("n", "gi", vim.lsp.buf.implementation, "Go to implementation"),
-  M.build_mapping("n", "gr", "<cmd><c-u>Telescope lsp_references<cr>", "Show references"),
-  M.build_mapping("n", "gs", vim.lsp.buf.signature_help, "Show signature"),
-  M.build_mapping("n", "<leader>d", vim.diagnostic.open_float , "Show signature"),
-  M.build_mapping("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, "Add workspace folder"),
-  M.build_mapping("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, "Remove workspace folder"),
-  M.build_mapping("n", "<leader>wl", function()
-    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, "List workspace folders"),
-  M.build_mapping("n", "<leader>td", vim.lsp.buf.type_definition, "Go to type definition"),
-  M.build_mapping("n", "<leader>tH", vim.lsp.buf.typehierarchy, "Go to type definition"),
-  M.build_mapping("n", "<leader>r", require "nvchad.lsp.renamer", "NvRenamer"),
-  M.build_mapping({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, "Code action"),
+local mappings = {
+  { "n", "gd", vim.lsp.buf.definition, "Go to definition" },
+  { "n", "gD", vim.lsp.buf.declaration, "Go to declaration" },
+  { "n", "gi", vim.lsp.buf.implementation, "Go to implementation" },
+  { "n", "gr", "<cmd><c-u>Telescope lsp_references<cr>", "Show references" },
+  { "n", "gs", vim.lsp.buf.signature_help, "Show signature" },
+  { "n", "<leader>d", vim.diagnostic.open_float, "Show signature" },
+  { "n", "<leader>wa", vim.lsp.buf.add_workspace_folder, "Add workspace folder" },
+  { "n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, "Remove workspace folder" },
+  { "n", "<leader>td", vim.lsp.buf.type_definition, "Go to type definition" },
+  { "n", "<leader>tH", vim.lsp.buf.typehierarchy, "Show type hierarchy" },
+  { "n", "<leader>r", require "nvchad.lsp.renamer", "NvRenamer" },
+  { { "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, "Code action" },
+  {
+    "n",
+    "<leader>wl",
+    function()
+      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+    end,
+    "List workspace folders",
+  },
 }
+
+local M = {}
 
 M.set_default_mappings = function(_, bufnr)
   local function opts(desc)
     return { buffer = bufnr, desc = "LSP " .. desc }
   end
 
-  for _, mapping in pairs(M.mappings) do
-    local modes = mapping.modes
-    local lhs = mapping.lhs
-    local rhs = mapping.rhs
-    local desc = mapping.desc
 
-    vim.keymap.set(modes, lhs, rhs, opts(desc))
+  for _, m in ipairs(mappings) do
+    vim.keymap.set(m[1], m[2], m[3], opts(m[4]))
   end
 end
 

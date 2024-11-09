@@ -1,36 +1,27 @@
-
 local function rustlsp(action)
   return function()
     vim.cmd.RustLsp(action)
   end
 end
 
+local mappings = {
+  { "n", "K", rustlsp { "hover", "actions" }, "Hover" },
+  { "n", "J", rustlsp "joinLines", "Join lines" },
+  { { "n", "v" }, "<leader>ca", rustlsp "codeAction", "Code action" },
+  { "n", "gp", rustlsp "parentModule", "Go to parent module" },
+  { "n", "<leader>d", rustlsp "renderDiagnostic", "Show diagnostics" },
+  { "n", "gh", rustlsp "openDocs", "Open Docs" },
+}
 
-local function on_attach(client, bufnr)
-  local lspconfig = require "configs.lspconfig"
-  lspconfig.set_default_mappings(client, bufnr)
-
-  local build_mapping = lspconfig.build_mapping
-  local mappings = {
-    build_mapping("n", "K", rustlsp { "hover", "actions" }, "Hover"),
-    build_mapping("n", "J", rustlsp "joinLines", "Join lines"),
-    build_mapping({ "n", "v" }, "<leader>ca", rustlsp "codeAction", "Code action"),
-    build_mapping("n", "gp", rustlsp "parentModule", "Go to parent module"),
-    build_mapping("n", "<leader>d", rustlsp "renderDiagnostic", "Show diagnostics"),
-    build_mapping("n", "<leader>do", rustlsp "openDocs", "Open Docs"),
-  }
+local function on_attach(_, bufnr)
+  require("configs.lspconfig").set_default_mappings(_, bufnr)
 
   local function opts(desc)
-    return { buffer = bufnr, desc = "LSP " .. desc }
+    return { buffer = bufnr, desc = "Rust LSP " .. desc }
   end
 
-  for _, mapping in ipairs(mappings) do
-    local modes = mapping.modes
-    local lhs = mapping.lhs
-    local rhs = mapping.rhs
-    local desc = mapping.desc
-
-    vim.keymap.set(modes, lhs, rhs, opts(desc))
+  for _, m in ipairs(mappings) do
+    vim.keymap.set(m[1], m[2], m[3], opts(m[4]))
   end
 end
 
