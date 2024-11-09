@@ -1,4 +1,4 @@
--- Default NvChad bindings must be manually added. Importing nvchad.mappings 
+-- Default NvChad bindings must be manually added. Importing nvchad.mappings
 -- will result in conflicting key mappings with |vim-tmux-navigator|
 
 local ui = require "harpoon.ui"
@@ -60,13 +60,13 @@ map("n", "<leader>hm", mark.add_file, { desc = "Harpoon Mark file" })
 map("n", "<leader>hs", ui.toggle_quick_menu, { desc = "Harpoon Show marked files" })
 
 local harpoons = {
-  {key = "f", label = "first"},
-  {key = "d", label = "second"},
-  {key = "s", label = "third"},
-  {key = "a", label = "fourth"},
-  {key = "u", label = "fifth"},
-  {key = "o", label = "sixth"},
-  {key = "p", label = "seventh"},
+  { key = "f", label = "first" },
+  { key = "d", label = "second" },
+  { key = "s", label = "third" },
+  { key = "a", label = "fourth" },
+  { key = "u", label = "fifth" },
+  { key = "o", label = "sixth" },
+  { key = "p", label = "seventh" },
 }
 
 for i, harpoon in ipairs(harpoons) do

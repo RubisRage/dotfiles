@@ -8,7 +8,6 @@ end
 
 local function on_attach(client, bufnr)
   local lspconfig = require "configs.lspconfig"
-
   lspconfig.set_default_mappings(client, bufnr)
 
   local build_mapping = lspconfig.build_mapping
@@ -17,7 +16,8 @@ local function on_attach(client, bufnr)
     build_mapping("n", "J", rustlsp "joinLines", "Join lines"),
     build_mapping({ "n", "v" }, "<leader>ca", rustlsp "codeAction", "Code action"),
     build_mapping("n", "gp", rustlsp "parentModule", "Go to parent module"),
-    build_mapping("n", "<leader>d", rustlsp "renderDiagnostic", "Go to parent module"),
+    build_mapping("n", "<leader>d", rustlsp "renderDiagnostic", "Show diagnostics"),
+    build_mapping("n", "<leader>do", rustlsp "openDocs", "Open Docs"),
   }
 
   local function opts(desc)

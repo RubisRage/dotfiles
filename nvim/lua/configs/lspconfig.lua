@@ -25,7 +25,7 @@ M.mappings = {
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, "List workspace folders"),
   M.build_mapping("n", "<leader>td", vim.lsp.buf.type_definition, "Go to type definition"),
-  M.build_mapping("n", "<leader>th", vim.lsp.buf.typehierarchy, "Go to type definition"),
+  M.build_mapping("n", "<leader>tH", vim.lsp.buf.typehierarchy, "Go to type definition"),
   M.build_mapping("n", "<leader>r", require "nvchad.lsp.renamer", "NvRenamer"),
   M.build_mapping({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, "Code action"),
 }
