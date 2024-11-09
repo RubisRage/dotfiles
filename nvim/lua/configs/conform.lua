@@ -1,8 +1,26 @@
 local options = {
+  formatters = {
+    prettier = {
+      prepend_args = { "--single-quote", "--prose-wrap preserve", "--jsx-single-quote" },
+    },
+  },
+
   formatters_by_ft = {
+    verilog = { "verible" },
+
     lua = { "stylua" },
-    -- css = { "prettier" },
-    -- html = { "prettier" },
+
+    rust = { "rustfmt" },
+
+    c = { "clang-format" },
+    cpp = { "clang-format" },
+
+    css = { "prettier" },
+    html = { "prettier" },
+    jsx = { "prettier" },
+    tsx = { "prettier" },
+    ts = { "prettier" },
+    js = { "prettier" },
   },
 
   -- format_on_save = {

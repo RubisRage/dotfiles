@@ -9,12 +9,13 @@ local map = vim.keymap.set
 
 -- Telescope
 map("n", "<leader>fp", "<cmd>Telescope find_files<CR>", { desc = "Telescope find files" })
-map("n", "<leader>fw", "<cmd>Telescope live_grep<CR>", { desc = "telescope live grep" })
+map("n", "<leader>fs", "<cmd>Telescope live_grep<CR>", { desc = "telescope live grep" })
 map("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "telescope find buffers" })
 map("n", "<leader>fh", "<cmd>Telescope help_tags<CR>", { desc = "telescope help page" })
-map("n", "<leader>ma", "<cmd>Telescope marks<CR>", { desc = "telescope find marks" })
+map("n", "<leader>fk", "<cmd>Telescope keymaps<CR>", { desc = "telescope find keymaps" })
 map("n", "<leader>fo", "<cmd>Telescope oldfiles<CR>", { desc = "telescope find oldfiles" })
 map("n", "<leader>fz", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { desc = "telescope find in current buffer" })
+map("n", "<leader>ma", "<cmd>Telescope marks<CR>", { desc = "telescope find marks" })
 map("n", "<leader>cm", "<cmd>Telescope git_commits<CR>", { desc = "telescope git commits" })
 map("n", "<leader>gt", "<cmd>Telescope git_status<CR>", { desc = "telescope git status" })
 map("n", "<leader>th", function()
@@ -74,13 +75,14 @@ for i, harpoon in ipairs(harpoons) do
   end, { desc = "Harpoon Navigate to " .. harpoon.label .. " marked file" })
 end
 
-
--- whichkey
-map("n", "<leader>wK", "<cmd>WhichKey <CR>", { desc = "whichkey all keymaps" })
-
+-- WhichKey
+map("n", "<leader>wK", vim.cmd.WhichKey, { desc = "whichkey all keymaps" })
 map("n", "<leader>wk", function()
   vim.cmd("WhichKey " .. vim.fn.input "WhichKey: ")
 end, { desc = "whichkey query lookup" })
+
+-- Color picker
+map("n", "<leader>cp", vim.cmd.Shades, { desc = "Minty Open color picker" })
 
 -- Remove nvim default bindings
 nomap("n", "gcc") -- Comment one line (Use gc{motion} instead)

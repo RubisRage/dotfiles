@@ -1,7 +1,7 @@
+
 return {
   {
     "stevearc/conform.nvim",
-    -- event = 'BufWritePre', -- uncomment for format on save
     opts = require "configs.conform",
   },
 
@@ -9,14 +9,28 @@ return {
   {
     "neovim/nvim-lspconfig",
     config = function()
-      require "configs.lspconfig"
+      require("configs.lspconfig").setup()
+    end,
+  },
+
+  {
+    "nvzone/minty",
+    cmd = { "Shades", "Huefy" },
+  },
+
+  {
+    "mrcjkb/rustaceanvim",
+    version = "^5",
+    lazy = false,
+    config = function()
+      require "configs.rustacean"
     end,
   },
 
   { "theprimeagen/harpoon" },
 
   {
-    "christmey/vim-tmux-navigator",
+    "christoomey/vim-tmux-navigator",
     lazy = false,
     cmd = {
       "TmuxNavigateLeft",

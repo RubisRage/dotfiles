@@ -7,15 +7,28 @@ local M = {}
 
 M.base46 = {
 	theme = "melange",
-
-	-- hl_override = {
-	-- 	Comment = { italic = true },
-	-- 	["@comment"] = { italic = true },
-	-- },
 }
 
 M.cheatsheet = {
   theme = "simple"
+}
+
+local formatters = {
+  "prettier",
+  "clang-format",
+}
+
+local servers = {
+  "verible",
+}
+
+local pkgs = {}
+
+vim.list_extend(pkgs, formatters)
+vim.list_extend(pkgs, servers)
+
+M.mason = {
+  pkgs = pkgs
 }
 
 return M
