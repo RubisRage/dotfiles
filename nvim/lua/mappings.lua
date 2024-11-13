@@ -82,7 +82,7 @@ map("n", "<leader>wk", function()
 end, { desc = "whichkey query lookup" })
 
 -- Color picker
-map("n", "<leader>cp", vim.cmd.Shades, { desc = "Minty Open color picker" })
+map("n", "<leader>cp", vim.cmd.Huefy, { desc = "Minty Open color picker" })
 
 -- Remove nvim default bindings
 nomap("n", "gcc") -- Comment one line (Use gc{motion} instead)
