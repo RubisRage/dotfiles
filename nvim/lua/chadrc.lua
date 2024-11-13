@@ -1,34 +1,40 @@
--- This file needs to have same structure as nvconfig.lua 
+-- This file needs to have same structure as nvconfig.lua
 -- https://github.com/NvChad/ui/blob/v3.0/lua/nvconfig.lua
--- Please read that file to know all available options :( 
+-- Please read that file to know all available options :(
 
 ---@type ChadrcConfig
-local M = {}
+local M = vim.defaulttable()
 
-local formatters = {
-  "prettier",
-  "clang-format",
+local pkgs = {
+  formatters = {
+    "prettier",
+    "clang-format",
+  },
+
+  servers = {
+    "verible",
+  },
+
+  debuggers = {
+    "codelldb",
+  },
 }
 
-local servers = {
-  "verible",
-}
-
-local pkgs = {}
-
-vim.list_extend(pkgs, formatters)
-vim.list_extend(pkgs, servers)
 
 M.mason = {
-  pkgs = pkgs
+  pkgs = {},
 }
 
+for _, kind in pairs(pkgs) do
+  vim.list_extend(M.mason.pkgs, kind)
+end
+
 M.base46 = {
-	theme = "melange",
+  theme = "melange",
 }
 
 M.cheatsheet = {
-  theme = "simple"
+  theme = "simple",
 }
 
 return M

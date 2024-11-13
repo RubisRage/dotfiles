@@ -1,4 +1,5 @@
 return {
+  -- LSP / Fomatting / Running
   {
     "stevearc/conform.nvim",
     opts = require "configs.conform",
@@ -6,7 +7,7 @@ return {
 
   {
     "hrsh7th/nvim-cmp",
-    opts = require "configs.cmp"
+    opts = require "configs.cmp",
   },
 
   {
@@ -17,8 +18,13 @@ return {
   },
 
   {
-    "nvzone/minty",
-    cmd = { "Shades", "Huefy" },
+    "mfussenegger/nvim-dap", dependencies = {"rcarriga/nvim-dap-ui"}
+  },
+
+  {
+    "rcarriga/nvim-dap-ui",
+    config = function () require("configs.dap-ui") end,
+    dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" }
   },
 
   {
@@ -30,6 +36,22 @@ return {
     end,
   },
 
+  {
+    "lervag/vimtex",
+    ft = { "latex" },
+  },
+
+  {
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    build = "cd app && npm install",
+    init = function()
+      vim.g.mkdp_filetypes = { "markdown" }
+    end,
+    ft = { "markdown" },
+  },
+
+  -- Moving around
   { "theprimeagen/harpoon" },
 
   {
@@ -50,22 +72,11 @@ return {
     },
   },
 
+  -- Others
+  {
+    "nvzone/minty",
+    cmd = { "Shades", "Huefy" },
+  },
+
   { "mbbill/undotree", cmd = { "UndotreeToggle" } },
-
-  { "tpope/vim-fugitive" },
-
-  {
-    "lervag/vimtex",
-    ft = { "latex" },
-  },
-
-  {
-    "iamcco/markdown-preview.nvim",
-    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-    build = "cd app && npm install",
-    init = function()
-      vim.g.mkdp_filetypes = { "markdown" }
-    end,
-    ft = { "markdown" },
-  },
 }

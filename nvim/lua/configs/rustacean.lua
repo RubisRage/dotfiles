@@ -14,7 +14,7 @@ local mappings = {
 }
 
 local function on_attach(_, bufnr)
-  require("configs.lspconfig").set_default_mappings(_, bufnr)
+  require("configs.lspconfig").defaults(_, bufnr)
 
   local function opts(desc)
     return { buffer = bufnr, desc = "Rust LSP " .. desc }

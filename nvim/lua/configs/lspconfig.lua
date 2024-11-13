@@ -26,11 +26,10 @@ local mappings = {
 
 local M = {}
 
-M.set_default_mappings = function(_, bufnr)
+M.defaults = function(_, bufnr)
   local function opts(desc)
     return { buffer = bufnr, desc = "LSP " .. desc }
   end
-
 
   for _, m in ipairs(mappings) do
     vim.keymap.set(m[1], m[2], m[3], opts(m[4]))
