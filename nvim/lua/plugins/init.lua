@@ -1,11 +1,14 @@
-
 return {
   {
     "stevearc/conform.nvim",
     opts = require "configs.conform",
   },
 
-  -- These are some examples, uncomment them if you want to see them work!
+  {
+    "hrsh7th/nvim-cmp",
+    opts = require "configs.cmp"
+  },
+
   {
     "neovim/nvim-lspconfig",
     config = function()
