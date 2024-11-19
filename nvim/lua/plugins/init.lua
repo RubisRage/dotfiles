@@ -11,20 +11,31 @@ return {
   },
 
   {
+    "nvim-tree/nvim-tree.lua",
+    enabled = false
+  },
+
+  {
     "neovim/nvim-lspconfig",
+    dependencies = {
+      "ej-shafran/compile-mode.nvim",
+    },
     config = function()
       require("configs.lspconfig").setup()
     end,
   },
 
   {
-    "mfussenegger/nvim-dap", dependencies = {"rcarriga/nvim-dap-ui"}
+    "mfussenegger/nvim-dap",
+    dependencies = { "rcarriga/nvim-dap-ui" },
   },
 
   {
     "rcarriga/nvim-dap-ui",
-    config = function () require("configs.dap-ui") end,
-    dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" }
+    config = function()
+      require "configs.dap-ui"
+    end,
+    dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
   },
 
   {
@@ -49,6 +60,14 @@ return {
       vim.g.mkdp_filetypes = { "markdown" }
     end,
     ft = { "markdown" },
+  },
+
+  {
+    "ej-shafran/compile-mode.nvim",
+    branch = "latest",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
   },
 
   -- Moving around
