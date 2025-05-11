@@ -9,17 +9,22 @@ local pkgs = {
   formatters = {
     "prettier",
     "clang-format",
+    "black",
   },
 
   servers = {
     "verible",
+    "clangd",
+    "basedpyright",
+    "jinja-lsp",
+    "html-lsp",
+    "tailwindcss-language-server",
   },
 
   debuggers = {
     "codelldb",
   },
 }
-
 
 M.mason = {
   pkgs = {},

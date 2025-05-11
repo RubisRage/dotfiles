@@ -4,7 +4,7 @@ set VIRTUAL_ENV_DISABLE_PROMPT "1"
 set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
 set -x MANROFFOPT "-c"
 
-function add_to_path
+function prepend
     if test -d $argv[1]
         if not contains -- $argv[1] $PATH
             set -p PATH $argv[1]
@@ -12,14 +12,16 @@ function add_to_path
     end
 end
 
-add_to_path ~/.local/bin
-add_to_path ~/.cargo/bin
-add_to_path /usr/local/texlive/2023/bin/x86_64-linux
-add_to_path ~/.platformio/penv/bin/
+prepend ~/.local/bin
+prepend ~/.cargo/bin
 
+prepend /usr/local/texlive/2024/bin/x86_64-linux
+set -p INFOPATH /usr/local/texlive/2024/texmf-dist/doc/info
+set -p MANPATH /usr/share/man/
+set -p MANPATH /usr/local/texlive/2024/texmf-dist/doc/man
 
 ## Starship prompt
-source ("/usr/bin/starship" init fish --print-full-init | psub)
+source (/usr/bin/starship init fish --print-full-init | psub)
 
 
 ## Functions needed for !! and !$ https://github.com/oh-my-fish/plugin-bang-bang
@@ -140,11 +142,6 @@ alias rip="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -200 | nl"
 
 # Replace yay with paru
 [ ! -x /usr/bin/yay ] && [ -x /usr/bin/paru ] && alias yay='paru'
-
-## Run neofetch if session is interactive
-if status --is-interactive
-   neofetch --ascii_distro ArcoLinux_small
-end
 
 set --universal nvm_default_version lts
 

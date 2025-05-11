@@ -12,17 +12,22 @@ return {
 
   {
     "nvim-tree/nvim-tree.lua",
-    enabled = false
+    enabled = false,
   },
 
   {
     "neovim/nvim-lspconfig",
     dependencies = {
       "ej-shafran/compile-mode.nvim",
+      "aznhe21/actions-preview.nvim",
     },
     config = function()
       require("configs.lspconfig").setup()
     end,
+  },
+
+  {
+    "aznhe21/actions-preview.nvim",
   },
 
   {
@@ -49,7 +54,11 @@ return {
 
   {
     "lervag/vimtex",
-    ft = { "latex" },
+    lazy = false,
+    init = function()
+      vim.g.vimtex_view_method = "zathura"
+      vim.g.vimtex_quickfix_open_on_warning = 0
+    end,
   },
 
   {

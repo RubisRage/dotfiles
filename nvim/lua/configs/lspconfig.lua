@@ -1,19 +1,48 @@
-local lspconfig = require "lspconfig"
 local nvlsp = require "nvchad.configs.lspconfig"
 
 local mappings = {
   { "n", "gd", vim.lsp.buf.definition, "Go to definition" },
   { "n", "gD", vim.lsp.buf.declaration, "Go to declaration" },
   { "n", "gi", vim.lsp.buf.implementation, "Go to implementation" },
-  { "n", "gr", "<cmd><c-u>Telescope lsp_references<cr>", "Show references" },
+  { "n", "gr", "<cmd>Telescope lsp_references<cr>", "Show references" },
   { "n", "gs", vim.lsp.buf.signature_help, "Show signature" },
-  { "n", "<leader>d", vim.diagnostic.open_float, "Show signature" },
   { "n", "<leader>wa", vim.lsp.buf.add_workspace_folder, "Add workspace folder" },
   { "n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, "Remove workspace folder" },
   { "n", "<leader>td", vim.lsp.buf.type_definition, "Go to type definition" },
   { "n", "<leader>tH", vim.lsp.buf.typehierarchy, "Show type hierarchy" },
   { "n", "<leader>r", require "nvchad.lsp.renamer", "NvRenamer" },
-  { { "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, "Code action" },
+  { "n", "<leader>d", vim.diagnostic.open_float, "Show diagnostic" },
+  {
+    "n",
+    "g.",
+    function()
+      local next = vim.diagnostic.get_next()
+
+      if next == nil then
+        print "No more diagnostics to jump to"
+        return
+      end
+
+      vim.api.nvim_win_set_cursor(0, { next.lnum + 1, next.col })
+    end,
+    "Go to next diagnostic",
+  },
+  {
+    "n",
+    "g,",
+    function()
+      local prev = vim.diagnostic.get_prev()
+
+      if prev == nil then
+        print "No more diagnostics to jump to"
+        return
+      end
+
+      vim.api.nvim_win_set_cursor(0, { prev.lnum + 1, prev.col })
+    end,
+    "Go to previous diagnostic",
+  },
+  { { "n", "v" }, "<leader>ca", require("actions-preview").code_actions, "Code action" },
   {
     "n",
     "<leader>wl",
@@ -42,18 +71,20 @@ M.setup = function()
   require("nvchad.lsp").diagnostic_config()
 
   -- Servers with default config
-  local defaults = { "html", "cssls" }
+  local defaults = { "html", "cssls", "clangd", "basedpyright", "tailwindcss" }
 
   for _, lsp in ipairs(defaults) do
-    lspconfig[lsp].setup {
-      on_attach = M.set_default_mappings,
+    vim.lsp.enable(lsp)
+    vim.lsp.config(lsp, {
+      on_attach = M.defaults,
       on_init = nvlsp.on_init,
       capabilities = nvlsp.capabilities,
-    }
+    })
   end
 
   -- Manually configured servers
-  lspconfig.lua_ls.setup {
+  vim.lsp.enable('lua_ls')
+  vim.lsp.config('lua_ls', {
     on_attach = M.set_default_mappings,
     capabilities = nvlsp.capabilities,
     on_init = nvlsp.on_init,
@@ -76,7 +107,16 @@ M.setup = function()
         },
       },
     },
-  }
+  })
+
+  vim.lsp.enable('jinja_lsp')
+  vim.lsp.config('jinja_lsp', {
+    on_attach = M.set_default_mappings,
+    capabilities = nvlsp.capabilities,
+    on_init = nvlsp.on_init,
+
+    filetypes = { "jinja", "jinja2", "htmldjango" },
+  })
 end
 
 return M
