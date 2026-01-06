@@ -5,7 +5,12 @@ local options = {
     },
 
     latexindent = {
+      command = "latexindent", -- Comes installed with livetex
       prepend_args = { "--modifylinebreaks", "--local" },
+    },
+
+    black = {
+      prepend_args = { "--line-length", "80" },
     },
   },
 

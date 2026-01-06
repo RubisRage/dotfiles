@@ -1,5 +1,7 @@
 local nvlsp = require "nvchad.configs.lspconfig"
 
+nvlsp.capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = true
+
 local mappings = {
   { "n", "gd", vim.lsp.buf.definition, "Go to definition" },
   { "n", "gD", vim.lsp.buf.declaration, "Go to declaration" },
@@ -74,18 +76,17 @@ M.setup = function()
   local defaults = { "html", "cssls", "clangd", "basedpyright", "tailwindcss" }
 
   for _, lsp in ipairs(defaults) do
-    vim.lsp.enable(lsp)
     vim.lsp.config(lsp, {
       on_attach = M.defaults,
       on_init = nvlsp.on_init,
       capabilities = nvlsp.capabilities,
     })
+    vim.lsp.enable(lsp)
   end
 
   -- Manually configured servers
-  vim.lsp.enable('lua_ls')
-  vim.lsp.config('lua_ls', {
-    on_attach = M.set_default_mappings,
+  vim.lsp.config("lua_ls", {
+    on_attach = M.defaults,
     capabilities = nvlsp.capabilities,
     on_init = nvlsp.on_init,
 
@@ -108,15 +109,47 @@ M.setup = function()
       },
     },
   })
+  vim.lsp.enable "lua_ls"
 
-  vim.lsp.enable('jinja_lsp')
-  vim.lsp.config('jinja_lsp', {
-    on_attach = M.set_default_mappings,
+  vim.lsp.config("jinja_lsp", {
+    on_attach = M.defaults,
     capabilities = nvlsp.capabilities,
     on_init = nvlsp.on_init,
 
     filetypes = { "jinja", "jinja2", "htmldjango" },
   })
+  vim.lsp.enable "jinja_lsp"
+
+  vim.lsp.config("html", {
+    on_attach = M.defaults,
+    capabilities = nvlsp.capabilities,
+    on_init = nvlsp.on_init,
+
+    filetypes = { "html", "templ", "jinja", "jinja2", "htmldjango" },
+  })
+  vim.lsp.enable "html"
+
+  vim.lsp.config("ltex_plus", {
+    capabilities = nvlsp.capabilities,
+    on_init = nvlsp.on_init,
+    on_attach = function()
+      M.defaults()
+      require("ltex_extra").setup {
+        path = ".ltex",
+        load_langs = { "es", "en-US" },
+      }
+    end,
+
+    settings = {
+      ltex = {
+        language = "es",
+        commands = {
+          ["\\texttt{}"] = "dummy",
+        },
+      },
+    },
+  })
+  vim.lsp.enable "ltex_plus"
 end
 
 return M

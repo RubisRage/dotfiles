@@ -19,6 +19,7 @@ local pkgs = {
     "jinja-lsp",
     "html-lsp",
     "tailwindcss-language-server",
+    "ltex-ls-plus",
   },
 
   debuggers = {
